@@ -6,6 +6,7 @@
   --white: #faf0e6;
   --shadow: gray;
   --logoText: rgb(43, 43, 43);
+  --button: #37474f;
 }
 
 html,
@@ -20,6 +21,9 @@ h1,h2,h3,h4,h5,h6,p{
   line-height: 1.6rem;
   letter-spacing: 1px;
 }
+h1,h3,p{
+  margin-top: 10px;
+}
 
 a {
   color: inherit;
@@ -30,17 +34,9 @@ a {
   box-sizing: border-box;
 }
 
-.container{
-  height: auto;
-  max-width: 800px;
-  min-width: auto;
-  margin-top: 0;
-  margin: 0 auto;
-  padding: 30px 10px;
-  position: relative;
-  height: 100%;
-  z-index: 10;
-  position: inherit;
+.heading{
+  font-size: 24px;
+  text-shadow: 0px 1px 2px gray;
 }
 
 button{
@@ -52,4 +48,20 @@ button{
   text-transform: uppercase;
   letter-spacing: 1px;
   cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+button:hover{
+  box-shadow: 0px 2px 4px gray;
+}
+
+.columnFlex{
+  display: flex;
+  flex-direction: column;
+}
+
+.rowFlex{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

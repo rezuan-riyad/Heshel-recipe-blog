@@ -1,0 +1,112 @@
+.container{
+  min-width: auto;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+.showcase{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.img, .aboutHeshel{
+  height: auto;
+  min-width: 300px;
+  max-width: 600px;
+}
+.img img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.aboutHeshel{
+  padding-left: 30px;
+}
+@media only screen  and (max-width: 792px){
+  .showcase{
+    display: flex;
+    flex-direction: column;
+  }
+  .aboutHeshel{
+    padding-left: 0;
+  }
+}
+
+.aboutChefs{
+  margin-top: 50px;
+}
+.aboutChefs section{
+  max-width: 100%;
+  min-width: 400px;
+  height: auto;
+  padding: 20px;
+  margin-bottom: 50px;
+  border: 1px solid lightgray;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+.aboutChefs section:hover{
+  box-shadow: 0 8px 16px lightgray;
+}
+.proPic{
+  width: 250px;
+  height: 250px;
+
+}
+.proPic img{
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.proData{
+  max-width: 500px;
+  padding-left: 20px;
+}
+
+@media only screen  and (max-width: 900px){
+  .proData{
+    width: 350px;
+    padding-left: 0;
+  }
+}
+@media only screen  and (max-width: 600px){
+  .aboutChefs section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .proData {
+    width: 100%;
+  }
+}
+
+.writeUs{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.writeUs div{
+  width: 50%;
+  height: auto;
+}
+.writeUs h1{
+  text-align: center;
+}
+
+.writeUs button{
+  background-color: var(--dark);
+  color: var(--white);
+}
+
+@media only screen  and (max-width: 600px){
+  .writeUs{
+    display: flex;
+    flex-direction: column;
+  }
+  .writeUs div{
+    width: 100%;
+    padding: 0 5px;
+  }
+}

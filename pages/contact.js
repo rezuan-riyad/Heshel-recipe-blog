@@ -5,9 +5,12 @@ export default function Contact() {
   return (
     <Layout title="Home">
       <Head>
-
+        
       </Head>
-      <div>Hello World.</div>
+      <div>
+        Contact Page
+
+      </div>
     </Layout>
   )
 }
