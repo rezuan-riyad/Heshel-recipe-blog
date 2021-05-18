@@ -1,70 +1,61 @@
 import Layout from '../../components/layout'
 import Head from 'next/head'
+import Link from 'next/link'
 import homeStyles from '../../styles/Home.module.css'
 import { useEffect, useRef, useState } from 'react'
 import Slideshow from '../../components/recipes/Slideshow'
-import Carousel from '../../components/home/Carousel'
+import CardGroup from '../../components/home/CardGroup'
 
-export default function Recipes() {
-  const data = [
-    {
-      id: 1,
-      title: "Eggless Red Velvet Pancakes",
-      subtitle: "Soft, fluffy Red Velvet Pancakes made with basic ingredients found in pantry. These pancakes take just 20 mins from start to finish and drizzled with a fluffy cream cheese icing, these are perfect anytime",
-      img: "pancake.jpg"
-    },
-    {
-      id: 2,
-      title: "Chocklete Banana Muffins",
-      subtitle: "These Vegan Chocolate Banana Muffins are super moist, packed with chocolate and so delicious that even pickiest eater won’t mind eating these!! Perfect breakfast or any time treat!",
-      img: "banana-muffin.jpg"
-    },
-    {
-      id: 3,
-      title: "Crispy Fried Chicken",
-      subtitle: "Lorem Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliquincididunt ut labore et dolore magna aliqu ",
-      img: "crispy-chicken.jpg"
+import { createClient } from 'contentful'
+
+export async function getStaticProps() {
+  const client = createClient({
+    space: process.env.CF_SPACE_ID,
+    accessToken: process.env.CF_ACCESS_KEY,
+  })
+
+  const res = await client.getEntries({ content_type: 'recipeBlogPost' })
+
+  return {
+    props: {
+      recipes: res.items
     }
-  ]
-  const vegData = [
-    {
-      id: 1,
-      title: "Broccoli Quinoa Cakes",
-      subtitle: "These Broccoli Quinoa Cakes can be made in 30 minutes & are a delicious healthy vegetarian meal that your whole family will love!",
-      img: "veg1.jpg"
-    },
-    {
-      id: 2,
-      title: "Eggplant Lassanga",
-      subtitle: "These Vegan Chocolate Banana Muffins are super moist, packed with chocolate and so delicious that even pickiest eater won’t mind eating these!! Perfect breakfast or any time treat!",
-      img: "eggplant.jpg"
-    },
-    {
-      id: 3,
-      title: "Roasted Cauliflower Pasta",
-      subtitle: "Lorem Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliquincididunt ut labore et dolore magna aliqu ",
-      img: "veg-3.jpg"
-    }
-  ]
+  }
+}
+
+export default function Recipes({ recipes }) {
+
+  const fastFoodRecipes = recipes.filter(recipe => {
+    return recipe.fields.category == 'fastfood'
+  })
+
+  const vegRecipes = recipes.filter(recipe => {
+    return recipe.fields.category == 'vegdine'
+  })
+
   return (
     <Layout title="Home">
       <Head>
 
       </Head>
-      <Slideshow recipesArr={data}/>
+      <Slideshow recipesArr={vegRecipes} />
       <div className={homeStyles.containerLg}>
         <h1>Dessert Recipes</h1>
         <hr />
-        <Carousel recipes={data}/>
+        <CardGroup recipes={fastFoodRecipes} />
         <section>
-          <button className="btn">See More</button>
+          <button className="btn">
+            <Link href={`/recipes/fastfood`}><a>See More</a></Link>
+          </button>
         </section>
 
         <h1>Vegetarian Dining</h1>
         <hr />
-        <Carousel recipes={vegData}/>
+        <CardGroup recipes={vegRecipes} />
         <section>
-          <button className="btn">See More</button>
+          <button className="btn">
+            <Link href={`/recipes/vegdine`}><a>See More</a></Link>
+          </button>
         </section>
 
       </div>

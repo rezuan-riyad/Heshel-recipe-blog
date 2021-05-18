@@ -1,14 +1,21 @@
 import React, { useState } from 'react'
+import Link from 'next/link'
 import Image from 'next/image'
 import styles from '../../styles/Home.module.css'
 
-function Carousel({ recipes }) {
+function CardGroup({ recipes }) {
 
-  const renderedRecipes = recipes.map(recipe => {
-    const imgSrc = "/images/" + recipe.img
-    const subtitle = recipe.subtitle.substring(0, 100) + "... "
+  let _recipes = []
+  for(let i=0; i<3; i++){
+    _recipes.push(recipes[i])
+  }
+  const renderedRecipes = _recipes.map(recipe => {
+    const { title, slug, subtitle, category, image } = recipe.fields
+    const { id } = recipe.sys
+    const imgSrc = "https:" + image.fields.file.url
+    const _subtitle = subtitle.substring(0,100) + "... "
     return (
-      <div className={styles.media} key={recipe.id}>
+      <div className={styles.media} key={id}>
         <Image
           src={imgSrc}
           width={300}
@@ -16,8 +23,13 @@ function Carousel({ recipes }) {
           layout="responsive"
         />
         <section>
-          <h3>{recipe.title}</h3>
-          <p>{subtitle}<span><a>See Detail</a></span></p>
+          <h3>{title}</h3>
+          <p>
+            {_subtitle}
+            <span>
+              <Link href={"/recipes/" + category+ "/" + slug}><a>See Detail</a></Link>
+            </span>
+          </p>
         </section>
         <style jsx>
           {`
@@ -55,4 +67,4 @@ function Carousel({ recipes }) {
   )
 }
 
-export default Carousel
+export default CardGroup

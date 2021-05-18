@@ -65,3 +65,11 @@ button:hover{
   flex-direction: row;
   justify-content: space-between;
 }
+.container{
+  max-width: 1040px;
+  min-width: auto;
+  margin: 0 auto;
+  padding: 20px 10px;
+  position: relative;
+  height: 100%;
+}

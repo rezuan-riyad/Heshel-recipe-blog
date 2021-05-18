@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import Image from 'next/image'
 import homeStyles from '../../styles/Home.module.css'
 import recipeStyles from '../../styles/Recipes.module.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
+import CardGroup from '../../components/home/CardGroup'
 
 import MediaCard from './MediaCard'
 
@@ -17,7 +15,7 @@ export default function Slideshow({ recipesArr }) {
       setIndex(index + 1)
     }
   }
-  console.log(index)
+
   const renderItem = setRenderItem(recipesArr, index)
 
   return (
@@ -25,15 +23,20 @@ export default function Slideshow({ recipesArr }) {
       <div className={homeStyles.containerLg}>
         <h1>Top Rated Recipes</h1>
         <hr />
+
+        <div className={recipeStyles.smScreenShow}>
+          <CardGroup recipes={recipesArr} />
+        </div>
+
         <div className={recipeStyles.showcase}>
-          <button onClick={handleClick} id="prev">
-            <FontAwesomeIcon icon={faAngleLeft} />
+          <button onClick={handleClick} id="prev" disabled={index === 0}>
+            Prev
           </button>
           <div className={recipeStyles.mediaSection}>
             {renderItem}
           </div>
-          <button onClick={handleClick} id="next">
-            <FontAwesomeIcon icon={faAngleRight} />
+          <button onClick={handleClick} id="next" disabled={index === 2}>
+            next
           </button>
         </div>
       </div>
@@ -43,8 +46,9 @@ export default function Slideshow({ recipesArr }) {
 
 function setRenderItem(recipesArr, index) {
   const newArr = recipesArr.filter((item, i) => i == index).map(item => {
+    const { id } = item.sys
     return (
-      <div key={item.id}>
+      <div key={id}>
         <MediaCard recipe={item} />
       </div>
     )

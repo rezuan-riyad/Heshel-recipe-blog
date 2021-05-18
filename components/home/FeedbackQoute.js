@@ -30,6 +30,7 @@ function FeedbackQuote() {
               margin-bottom: 50px;
               border-top-left-radius: 40px;
               border-bottom-right-radius: 40px;
+              transform: rotate(-2deg);
             }
             h4, p{
               color: #eee;

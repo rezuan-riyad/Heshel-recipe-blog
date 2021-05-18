@@ -3,31 +3,31 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Layout from '../components/layout'
 import Backdrop from '../components/home/Backdrop'
-import Carousel from '../components/home/Carousel'
+import CardGroup from '../components/home/CardGroup'
 import FeedbackQuote from '../components/home/FeedbackQoute'
 
-export default function Home() {
-  const recipes = [
-    {
-      id: 1,
-      title: "Eggless Red Velvet Pancakes",
-      subtitle: "Soft, fluffy Red Velvet Pancakes made with basic ingredients found in pantry. These pancakes take just 20 mins from start to finish and drizzled with a fluffy cream cheese icing, these are perfect anytime",
-      img: "pancake.jpg"
-    },
-    {
-      id: 2,
-      title: "Chocklete Banana Muffins",
-      subtitle: "These Vegan Chocolate Banana Muffins are super moist, packed with chocolate and so delicious that even pickiest eater won’t mind eating these!! Perfect breakfast or any time treat!",
-      img: "banana-muffin.jpg"
-    },
-    {
-      id: 3,
-      title: "Crispy Fried Chicken",
-      subtitle: "Lorem Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliquincididunt ut labore et dolore magna aliqu ",
-      img: "crispy-chicken.jpg"
+import { createClient } from 'contentful'
+
+export async function getStaticProps() {
+  const client = createClient({
+    space: process.env.CF_SPACE_ID ,
+    accessToken: process.env.CF_ACCESS_KEY,
+  })
+
+  const res = await client.getEntries({ content_type: 'recipeBlogPost'})
+
+  return {
+    props: {
+      recipes: res.items
     }
-  ]
-  
+  }
+}
+
+export default function Home({ recipes }) {
+  let editorPick = []
+  for(let i=0; i < 3; i++){
+    editorPick.push(recipes[i])
+  }
   return (
     <Layout title="Home">
       <Head>
@@ -52,7 +52,7 @@ export default function Home() {
       <div className={styles.containerLg}>
         <h1 className="heading">Editor's Pick</h1>
         <hr />
-        <Carousel recipes={recipes}/>
+        <CardGroup recipes={editorPick}/>
       </div>
 
       <div className={styles.containerLg}>
