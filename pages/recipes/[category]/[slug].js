@@ -1,8 +1,8 @@
 import { createClient } from 'contentful'
 import Layout from '../../../components/layout'
 import recipeStyles from '../../../styles/Recipes.module.css'
+import MakingProcess from '../../../components/recipes/MakingProcess'
 import Image from 'next/image'
-
 
 const client = createClient({
   space: process.env.CF_SPACE_ID,
@@ -36,12 +36,11 @@ export async function getStaticProps({ params }) {
 export default function DynamicRoute({ recipe }) {
   const { title, subtitle, slug, image, ingradients, description, category } = recipe.fields
   const imgSrc = "https:" + image.fields.file.url
-  console.log(ingradients)
 
   const renderIngradients = ingradients.map( (item,i) => {
     return (<li key={i}><h4>{item}</h4></li>)
   })
-  console.log(description)
+
   return (
     <Layout>
       <div className="container">
@@ -60,9 +59,7 @@ export default function DynamicRoute({ recipe }) {
         { renderIngradients }
         </ul>
         <h2>Making Process</h2>
-        <ul>
-
-        </ul>
+        <MakingProcess description={description}/>
       </div>
     </Layout>
   )
