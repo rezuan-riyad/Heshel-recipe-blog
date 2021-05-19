@@ -1,0 +1,80 @@
+.content{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+@media only screen and (max-width:740px){
+  .content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+.leftBar{
+  max-width: 500px;
+  min-width: 300px;
+  height: auto;
+  padding: 20px;
+}
+
+.form{
+  width: 600px;
+  background-color: white;
+  padding: 0 20px 20px 20px;
+  box-shadow: 0px 0px 20px lightgray;
+  border-radius: 5px;
+  margin-top: 40px;
+}
+
+.form input, .form textarea{
+  display: block;
+  width: 100%;
+  outline: none;
+  border: none;
+  background-color: inherit;
+  margin: 20px 0;
+  border-bottom: 1px solid lightgray;
+}
+
+.form input{
+  height: 40px;
+  padding: 5px 10px;
+}
+.form textarea{
+  max-width: 560px;
+  min-height: 200px;
+  padding: 10px 10px;
+}
+
+.form input:focus, .form textarea:focus{
+  border-bottom: 1px solid gray;
+}
+
+@media only screen and (max-width:600px){
+  .form{
+    width: 500px;
+  }
+  .form textarea{
+    max-width: 460px;
+  }
+}
+@media only screen and (max-width:512px){
+  .form{
+    width: 440px;
+  }
+  .form textarea{
+    max-width: 400px;
+  }
+}
+
+@media only screen and (max-width:440px){
+  .form{
+    width: 400px;
+  }
+  .form textarea{
+    max-width: 360px;
+  }
+}

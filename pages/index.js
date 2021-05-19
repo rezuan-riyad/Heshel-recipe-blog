@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 import Layout from '../components/layout'
 import Backdrop from '../components/home/Backdrop'
@@ -24,10 +25,6 @@ export async function getStaticProps() {
 }
 
 export default function Home({ recipes }) {
-  let editorPick = []
-  for(let i=0; i < 3; i++){
-    editorPick.push(recipes[i])
-  }
   return (
     <Layout title="Home">
       <Head>
@@ -42,8 +39,16 @@ export default function Home({ recipes }) {
             sed do eiusmod tempor incididunt ut labore et dolore magna aliqu
             incididunt ut labore et dolore magna aliqu</h3>
             <div className={styles.btnGroup}>
-              <button className={styles.filledBtn}>Make Recipe</button>
-              <button className={styles.outlineBtn}>Explore Recipes</button>
+              <button className={styles.filledBtn}>
+                <Link href="/contact">
+                  <a>Send Recipe</a>
+                </Link>
+              </button>
+              <button className={styles.outlineBtn}>
+                <Link href="/recipes">
+                  <a>Explore Recipes</a>
+                </Link>
+              </button>
             </div>
           </div>
         </div>
@@ -52,7 +57,7 @@ export default function Home({ recipes }) {
       <div className={styles.containerLg}>
         <h1 className="heading">Editor's Pick</h1>
         <hr />
-        <CardGroup recipes={editorPick}/>
+        <CardGroup recipes={recipes}/>
       </div>
 
       <div className={styles.containerLg}>
