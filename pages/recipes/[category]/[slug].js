@@ -29,11 +29,21 @@ export async function getStaticProps({ params }) {
     'fields.slug': params.slug
   })
 
+  if( !items.length){
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    }
+  }
+
   return {
     props: { recipe: res.items[0] },
     revalidate: 10
   }
 }
+
 export default function DynamicRoute({ recipe }) {
   if(!recipe){
     return <div>Loading</div>
