@@ -30,7 +30,8 @@ export async function getStaticProps({ params }) {
   })
 
   return {
-    props: { recipe: res.items[0] }
+    props: { recipe: res.items[0] },
+    revalidate: 10
   }
 }
 export default function DynamicRoute({ recipe }) {
