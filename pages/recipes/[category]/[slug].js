@@ -32,14 +32,14 @@ export async function getStaticProps({ params }) {
   if( !items.length){
     return {
       redirect: {
-        destination: '/',
+        destination: '/404',
         permanent: false
       }
     }
   }
 
   return {
-    props: { recipe: res.items[0] },
+    props: { recipe: items[0] },
     revalidate: 10
   }
 }
