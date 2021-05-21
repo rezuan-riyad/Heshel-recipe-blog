@@ -24,7 +24,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
 
-  const res = await client.getEntries({
+  const { items } = await client.getEntries({
     content_type: 'recipeBlogPost',
     'fields.slug': params.slug
   })
