@@ -16,7 +16,7 @@ export default function MakingProcess({ description }) {
     }
   }
   renderSteps(description.content)
-  console.log(stepsArr)
+
   return (
     <ul>
       { stepsArr.map( (item, i) => {

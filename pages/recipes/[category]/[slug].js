@@ -24,22 +24,24 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
 
-  const { items } = await client.getEntries({
+  const res  = await client.getEntries({
     content_type: 'recipeBlogPost',
     'fields.slug': params.slug
   })
 
+  const { items } = res
+
   if( !items.length){
     return {
       redirect: {
-        destination: '/404',
+        destination: '/',
         permanent: false
       }
     }
   }
 
   return {
-    props: { recipe: items[0] },
+    props: { recipe: res.items[0] },
     revalidate: 10
   }
 }
@@ -48,6 +50,7 @@ export default function DynamicRoute({ recipe }) {
   if(!recipe){
     return <div>Loading</div>
   }
+  console.log(recipe)
   const { title, subtitle, slug, image, ingradients, description, category } = recipe.fields
   const imgSrc = "https:" + image.fields.file.url
 
