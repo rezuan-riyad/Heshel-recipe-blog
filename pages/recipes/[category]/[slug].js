@@ -23,7 +23,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  console.log("params", params)
+
   const res = await client.getEntries({
     content_type: 'recipeBlogPost',
     'fields.slug': params.slug

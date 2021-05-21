@@ -18,13 +18,13 @@ export async function getStaticProps() {
 
   return {
     props: {
-      recipes: res.items
+      recipes: res.items,
+      revalidate: 1
     }
   }
 }
 
 export default function Recipes({ recipes }) {
-  console.log("recipes", recipes)
 
   const fastFoodRecipes = recipes.filter(recipe => {
     return recipe.fields.category == 'fastfood'
