@@ -28,7 +28,8 @@ export async function getStaticProps({ params }) {
     'fields.category': params.category
   })
   return {
-    props: { recipes: res.items }
+    props: { recipes: res.items },
+    revalidate: 10
   }
 }
 

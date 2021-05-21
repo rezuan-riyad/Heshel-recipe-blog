@@ -35,6 +35,9 @@ export async function getStaticProps({ params }) {
   }
 }
 export default function DynamicRoute({ recipe }) {
+  if(!recipe){
+    return <div>Loading</div>
+  }
   const { title, subtitle, slug, image, ingradients, description, category } = recipe.fields
   const imgSrc = "https:" + image.fields.file.url
 
